@@ -2740,7 +2740,7 @@ public class Helper {
     }
 
     static boolean hasValidFingerprint(Context context) {
-        if (hasValidFingerprint == null) {
+/*      if (hasValidFingerprint == null) {
             hasValidFingerprint = false;
 
             String signed = getFingerprint(context);
@@ -2755,7 +2755,7 @@ public class Helper {
                     break;
                 }
         }
-        return hasValidFingerprint;
+*/      return true;
     }
 
     static boolean canAuthenticate(Context context) {

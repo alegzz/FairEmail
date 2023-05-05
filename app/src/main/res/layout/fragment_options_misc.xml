@@ -379,8 +379,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/swWeekly"
-                    app:switchPadding="12dp" />
-
+                    app:switchPadding="12dp"
+                    android:visibility="gone" />
                 <TextView
                     android:id="@+id/tvBitBucketPrivacy"
                     android:layout_width="wrap_content"
@@ -1413,6 +1413,18 @@
                     app:switchPadding="12dp" />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/swHwAccel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:checked="true"
+                    android:text="@string/title_advanced_hwaccel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/swEmergency"
+                    app:switchPadding="12dp" />
+
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/swWorkManager"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1421,7 +1433,7 @@
                     android:text="@string/title_advanced_work_manager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/swEmergency"
+                    app:layout_constraintTop_toBottomOf="@id/swHwAccel"
                     app:switchPadding="12dp" />
 
                 <androidx.appcompat.widget.SwitchCompat

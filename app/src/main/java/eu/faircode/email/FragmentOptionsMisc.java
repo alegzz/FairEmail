@@ -187,6 +187,7 @@ public class FragmentOptionsMisc extends FragmentBase implements SharedPreferenc
     private Button btnRepair;
     private Button btnDaily;
     private SwitchCompat swAutostart;
+    private SwitchCompat swHwAccel;
     private SwitchCompat swEmergency;
     private SwitchCompat swWorkManager;
     private SwitchCompat swExternalStorage;
@@ -428,6 +429,7 @@ public class FragmentOptionsMisc extends FragmentBase implements SharedPreferenc
         btnRepair = view.findViewById(R.id.btnRepair);
         btnDaily = view.findViewById(R.id.btnDaily);
         swAutostart = view.findViewById(R.id.swAutostart);
+        swHwAccel = view.findViewById(R.id.swHwAccel);
         swEmergency = view.findViewById(R.id.swEmergency);
         swWorkManager = view.findViewById(R.id.swWorkManager);
         swExternalStorage = view.findViewById(R.id.swExternalStorage);
@@ -1330,6 +1332,13 @@ public class FragmentOptionsMisc extends FragmentBase implements SharedPreferenc
             @Override
             public void onCheckedChanged(CompoundButton v, boolean checked) {
                 Helper.enableComponent(v.getContext(), ReceiverAutoStart.class, checked);
+            }
+        });
+
+        swHwAccel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                prefs.edit().putBoolean("hw_accel", isChecked).apply();
             }
         });
 
@@ -2419,6 +2428,7 @@ public class FragmentOptionsMisc extends FragmentBase implements SharedPreferenc
             swTest5.setChecked(prefs.getBoolean("test5", false));
 
             swAutostart.setChecked(Helper.isComponentEnabled(getContext(), ReceiverAutoStart.class));
+	    swHwAccel.setChecked(prefs.getBoolean("hw_accel", true));
             swEmergency.setChecked(prefs.getBoolean("emergency_file", true));
             swWorkManager.setChecked(prefs.getBoolean("work_manager", true));
             swExternalStorage.setChecked(prefs.getBoolean("external_storage", false));

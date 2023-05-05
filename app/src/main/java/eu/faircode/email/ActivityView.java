@@ -53,7 +53,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.os.Build;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -261,8 +261,8 @@ public class ActivityView extends ActivityBilling implements FragmentManager.OnB
             layoutId = R.layout.activity_view_landscape_split;
 
         view = LayoutInflater.from(this).inflate(layoutId, null);
+        if (!prefs.getBoolean("hw_accel", true)) { view.setLayerType(View.LAYER_TYPE_SOFTWARE, null); }
         setContentView(view);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setCustomView(R.layout.action_bar);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -1630,19 +1630,19 @@ public class ActivityView extends ActivityBilling implements FragmentManager.OnB
                             throw new IOException("tag_name field missing");
                         if (!jroot.has("assets") || jroot.isNull("assets"))
                             throw new IOException("assets section missing");
-
+                        String abi = Build.SUPPORTED_ABIS[0];
                         // Get update info
                         UpdateInfo info = new UpdateInfo();
                         info.tag_name = jroot.getString("tag_name");
                         info.html_url = BuildConfig.GITHUB_LATEST_URI;
-
+ 
                         // Check if new release
                         JSONArray jassets = jroot.getJSONArray("assets");
                         for (int i = 0; i < jassets.length(); i++) {
                             JSONObject jasset = jassets.getJSONObject(i);
                             if (jasset.has("name") && !jasset.isNull("name")) {
                                 String name = jasset.getString("name");
-                                if (name.endsWith(".apk") && name.contains("github")) {
+                                if (name.endsWith(abi+"-release.apk") && name.contains("github")) {
                                     info.download_url = jasset.optString("browser_download_url");
                                     Log.i("Latest version=" + info.tag_name);
                                     if (BuildConfig.DEBUG)

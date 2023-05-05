@@ -331,10 +331,10 @@ public class FragmentSetup extends FragmentBase implements SharedPreferences.OnS
 
                         int itemId = item.getItemId();
                         if (itemId == R.string.title_setup_gmail) {
-                            if (Helper.hasValidFingerprint(getContext()) || BuildConfig.DEBUG)
+/*                          if (Helper.hasValidFingerprint(getContext()) || BuildConfig.DEBUG)
                                 lbm.sendBroadcast(new Intent(ActivitySetup.ACTION_QUICK_GMAIL));
                             else
-                                new AlertDialog.Builder(getContext())
+*/                              new AlertDialog.Builder(getContext())
                                         .setIcon(R.drawable.twotone_info_24)
                                         .setTitle(item.getTitle())
                                         .setMessage(R.string.title_setup_gmail_support)
